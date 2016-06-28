@@ -60,4 +60,29 @@ for review in clean_train_reviews:
 	train_data_features = vectorizer.fit_transform(clean_train_reviews)
 #train_data_features = train_data_features.toarray()
 
-# #print train_data_features.shape()
+print train_data_features.shape()
+# Take a look at the words in the vocabulary
+vocab = vectorizer.get_feature_names()
+print vocab
+
+import numpy as np
+
+# Sum up the counts of each vocabulary word
+dist = np.sum(train_data_features, axis=0)
+
+# For each, print the vocabulary word and the number of times it 
+# appears in the training set
+for tag, count in zip(vocab, dist):
+    print count, tag
+
+print "Training the random forest..."
+from sklearn.ensemble import RandomForestClassifier
+
+# Initialize a Random Forest classifier with 100 trees
+forest = RandomForestClassifier(n_estimators = 100) 
+
+# Fit the forest to the training set, using the bag of words as 
+# features and the sentiment labels as the response variable
+#
+# This may take a few minutes to run
+forest = forest.fit( train_data_features, train["sentiment"] )
