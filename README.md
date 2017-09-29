@@ -1,1 +1,2 @@
-#####Mining Sentiment from Text
+### Mining Sentiment from Text
+Summer weekend project
